@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import vertexai
-from vertexai.preview.language_models import ChatModel
+# from vertexai.preview.language_models import ChatModel
+from vertexai.preview.generative_models import GenerativeModel
 import os
 import google.cloud.logging
 
@@ -17,7 +18,8 @@ logger = client.logger(LOG_NAME)
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
 def create_session():
-    chat_model = ChatModel.from_pretrained("gemini-1.0-pro-001")
+    # chat_model = ChatModel.from_pretrained("gemini-1.0-pro-001")
+    chat_model = GenerativeModel("gemini-1.0-pro")
     chat = chat_model.start_chat()
     return chat
 
